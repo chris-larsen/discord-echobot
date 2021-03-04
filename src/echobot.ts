@@ -290,7 +290,7 @@ class EchoBot {
             parts.push(`Direct Messages`)
         }
 
-        return "`" + parts.join("/") + "`"
+        return "`#" + parts.join("/") + "`"
     }
 
     private createHeader(message: Discord.Message, redirect: EchobotRedirect): Discord.RichEmbed | string | null {
@@ -325,7 +325,7 @@ class EchoBot {
 
             // Add source if requested.
             if (redirect.options && redirect.options.includeSource) {
-                messageSource += `[${this.explainPath(message.channel)} **${message.member.displayName}**] `;
+                messageSource += `[${this.explainPath(message.channel)} **${message.member.displayName}**]: `;
             }
 
             if (destinationMessage == "") {
