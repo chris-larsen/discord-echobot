@@ -277,17 +277,19 @@ class EchoBot {
     private explainPath(channel: Discord.Channel): string {
         let parts = []
 
-        if (channel instanceof Discord.GuildChannel) {
-            parts.push(channel.guild.name)
-            if (channel.parent) {
-                parts.push(channel.parent.name)
-            }
-            parts.push(channel.name)
-        } else if (channel instanceof Discord.DMChannel) {
-            parts.push(`Direct Messages`)
-        }
+        parts.push(channel.name)
+//         if (channel instanceof Discord.GuildChannel) {
+//             parts.push(channel.guild.name)
+//             if (channel.parent) {
+//                 parts.push(channel.parent.name)
+//             }
+//             parts.push(channel.name)
+//         } else if (channel instanceof Discord.DMChannel) {
+//             parts.push(`Direct Messages`)
+//         }
 
-        return parts.join("/")
+//         return parts.join("/")
+           return parts
     }
 
     private createHeader(message: Discord.Message, redirect: EchobotRedirect): Discord.RichEmbed | string | null {
@@ -333,7 +335,7 @@ class EchoBot {
     }
 
     private createBody(message: Discord.Message, redirect: EchobotRedirect): { contents?: string, embed?: Discord.RichEmbed } {
-        let contents = "[${this.message.channel}] **${message.member.displayName}**: " + message.content;
+        let contents = '`${this.explainPath(message.channel)}` **${message.member.displayName}**: ' + message.content;
         let embed: Discord.RichEmbed = undefined;
 
         // Copy rich embed if requested.
