@@ -30,7 +30,7 @@ import { EchobotRedirect } from "./model/redirect.model";
 const imageExts = ["jpg", "jpeg", "png", "gif", "webp", "tif", "tiff", "bmp", "svg", "jif", "jfif", "apng"]
 
 // message source to pass into message body
-var messagesource = ""
+var messageSource = ""
 
 // Configure logger
 const logger = winston.createLogger({
@@ -290,7 +290,7 @@ class EchoBot {
             parts.push(`Direct Messages`)
         }
 
-        return parts.join("/")
+        return "`" + parts.join("/") + "`"
     }
 
     private createHeader(message: Discord.Message, redirect: EchobotRedirect): Discord.RichEmbed | string | null {
