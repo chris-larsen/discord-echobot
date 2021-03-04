@@ -1,7 +1,7 @@
 /*
  * Discord Echobot
  * A Node.js Discord Self-Bot to Copy Messages From One Channel to Another
- *a
+ *
  * Copyright (C) 2018 Mitch Talmadge (https://github.com/MitchTalmadge)
  * Copyright (C) 2018 bishop-bd (https://github.com/bishop-bd)
  *
