@@ -1,5 +1,5 @@
 /*
- * Discord Echobotz
+ * Discord Echobot
  * A Node.js Discord Self-Bot to Copy Messages From One Channel to Another
  *
  * Copyright (C) 2018 Mitch Talmadge (https://github.com/MitchTalmadge)
@@ -275,9 +275,8 @@ class EchoBot {
     }
 
     private explainPath(channel: Discord.Channel): string {
-        let parts = []
+//         let parts = []
 
-        parts.push(channel.name)
 //         if (channel instanceof Discord.GuildChannel) {
 //             parts.push(channel.guild.name)
 //             if (channel.parent) {
@@ -289,7 +288,7 @@ class EchoBot {
 //         }
 
 //         return parts.join("/")
-           return parts
+           return "`" + channel.name + "`"
     }
 
     private createHeader(message: Discord.Message, redirect: EchobotRedirect): Discord.RichEmbed | string | null {
@@ -319,12 +318,12 @@ class EchoBot {
 
             // Add title if requested.
             if (redirect.options && redirect.options.title) {
-                // destinationMessage += "**" + redirect.options.title + "** ";
+                destinationMessage += "**" + redirect.options.title + "**\n";
             }
 
             // Add source if requested.
             if (redirect.options && redirect.options.includeSource) {
-                // destinationMessage += `[${this.message.channel}] **${message.member.displayName}**: `;
+                destinationMessage += `${this.explainPath(message.channel)} **${message.member.displayName}** `;
             }
 
             if (destinationMessage == "") {
@@ -335,7 +334,7 @@ class EchoBot {
     }
 
     private createBody(message: Discord.Message, redirect: EchobotRedirect): { contents?: string, embed?: Discord.RichEmbed } {
-        let contents = '`${this.explainPath(message.channel)}` **${message.member.displayName}**: ' + message.content;
+        let contents = message.content;
         let embed: Discord.RichEmbed = undefined;
 
         // Copy rich embed if requested.
@@ -369,4 +368,3 @@ class EchoBot {
 }
 
 new EchoBot();
-
