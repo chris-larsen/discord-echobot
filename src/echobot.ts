@@ -29,6 +29,9 @@ import { EchobotRedirect } from "./model/redirect.model";
 // Constants
 const imageExts = ["jpg", "jpeg", "png", "gif", "webp", "tif", "tiff", "bmp", "svg", "jif", "jfif", "apng"]
 
+// message source to pass into message body
+var messagesource = ""
+
 // Configure logger
 const logger = winston.createLogger({
     level: 'info',
@@ -275,20 +278,19 @@ class EchoBot {
     }
 
     private explainPath(channel: Discord.Channel): string {
-//         let parts = []
+        let parts = []
 
-//         if (channel instanceof Discord.GuildChannel) {
+        if (channel instanceof Discord.GuildChannel) {
 //             parts.push(channel.guild.name)
 //             if (channel.parent) {
 //                 parts.push(channel.parent.name)
 //             }
-//             parts.push(channel.name)
-//         } else if (channel instanceof Discord.DMChannel) {
-//             parts.push(`Direct Messages`)
-//         }
+            parts.push(channel.name)
+        } else if (channel instanceof Discord.DMChannel) {
+            parts.push(`Direct Messages`)
+        }
 
-//         return parts.join("/")
-           return "`" + channel.name + "`"
+        return parts.join("/")
     }
 
     private createHeader(message: Discord.Message, redirect: EchobotRedirect): Discord.RichEmbed | string | null {
@@ -323,7 +325,7 @@ class EchoBot {
 
             // Add source if requested.
             if (redirect.options && redirect.options.includeSource) {
-                destinationMessage += `${this.explainPath(message.channel)} **${message.member.displayName}** `;
+                messageSource += `${this.explainPath(message.channel)} **${message.member.displayName}** `;
             }
 
             if (destinationMessage == "") {
@@ -334,7 +336,7 @@ class EchoBot {
     }
 
     private createBody(message: Discord.Message, redirect: EchobotRedirect): { contents?: string, embed?: Discord.RichEmbed } {
-        let contents = message.content;
+        let contents = messageSource + message.content;
         let embed: Discord.RichEmbed = undefined;
 
         // Copy rich embed if requested.
