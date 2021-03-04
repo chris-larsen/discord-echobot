@@ -317,12 +317,12 @@ class EchoBot {
 
             // Add title if requested.
             if (redirect.options && redirect.options.title) {
-                destinationMessage += "**" + redirect.options.title + "** ";
+                // destinationMessage += "**" + redirect.options.title + "** ";
             }
 
             // Add source if requested.
             if (redirect.options && redirect.options.includeSource) {
-                destinationMessage += `**${message.member.displayName}** in **${this.explainPath(message.channel)}** `;
+                // destinationMessage += `[${this.message.channel}] **${message.member.displayName}**: `;
             }
 
             if (destinationMessage == "") {
@@ -333,7 +333,7 @@ class EchoBot {
     }
 
     private createBody(message: Discord.Message, redirect: EchobotRedirect): { contents?: string, embed?: Discord.RichEmbed } {
-        let contents = message.content;
+        let contents = "[${this.message.channel}] **${message.member.displayName}**: " + message.content;
         let embed: Discord.RichEmbed = undefined;
 
         // Copy rich embed if requested.
