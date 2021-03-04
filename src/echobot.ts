@@ -317,12 +317,12 @@ class EchoBot {
 
             // Add title if requested.
             if (redirect.options && redirect.options.title) {
-                destinationMessage += "**" + redirect.options.title + "**\n";
+                destinationMessage += "**" + redirect.options.title + "** ";
             }
 
             // Add source if requested.
             if (redirect.options && redirect.options.includeSource) {
-                destinationMessage += `*Author: **${message.member.displayName}** in **${this.explainPath(message.channel)}***\n`;
+                destinationMessage += `**${message.member.displayName}** in **${this.explainPath(message.channel)}** `;
             }
 
             if (destinationMessage == "") {
